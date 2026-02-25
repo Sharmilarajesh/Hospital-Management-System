@@ -7,16 +7,17 @@ export default defineConfig({
     port: 3000,
     open: true
   },
+  preview: {
+    port: 10000,
+    host: true,
+    allowedHosts: [
+      'hms-frontend-9jbk.onrender.com',
+      'localhost',
+      '.onrender.com'  
+    ]
+  },
   build: {
     outDir: 'dist',
-    sourcemap: false,
-    // Reduce chunk size
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom']
-        }
-      }
-    }
+    sourcemap: false
   }
 })

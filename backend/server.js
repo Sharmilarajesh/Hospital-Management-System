@@ -4,31 +4,24 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const seedAdmin = require('./seed/seedAdmin');
 
-// Load env vars
 dotenv.config();
 
-// Connect to database
 connectDB();
 
-// Seed admin (optional - run only once)
 seedAdmin();
 
 const app = express();
 
-// Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Enable CORS
 app.use(cors());
 
-// Mount routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/doctor', require('./routes/doctorRoutes'));
 app.use('/api/patient', require('./routes/patientRoutes'));
 
-// Base route
 app.get('/', (req, res) => {
     res.json({ 
         message: 'Hospital Management System API',
@@ -42,7 +35,6 @@ app.get('/', (req, res) => {
     });
 });
 
-// Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ 

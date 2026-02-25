@@ -1,10 +1,9 @@
-const API_URL = 'http://localhost:5000/api';  // NO trailing slash!
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// GET 
 export const get = async (endpoint, token) => {
   try {
     const url = endpoint.startsWith('/') ? `${API_URL}${endpoint}` : `${API_URL}/${endpoint}`;
-    console.log('GET Request to:', url); 
+    console.log('GET Request to:', url);
     
     const response = await fetch(url, {
       headers: {
@@ -12,7 +11,7 @@ export const get = async (endpoint, token) => {
       }
     });
     const data = await response.json();
-    console.log('GET Response:', data); 
+    console.log('GET Response:', data);
     return data;
   } catch (error) {
     console.log('API Error:', error);
@@ -20,12 +19,11 @@ export const get = async (endpoint, token) => {
   }
 };
 
-// POST 
 export const post = async (endpoint, body, token) => {
   try {
     const url = endpoint.startsWith('/') ? `${API_URL}${endpoint}` : `${API_URL}/${endpoint}`;
-    console.log('POST Request to:', url); 
-    console.log('POST Body:', body); 
+    console.log('POST Request to:', url);
+    console.log('POST Body:', body);
     
     const response = await fetch(url, {
       method: 'POST',
@@ -36,7 +34,7 @@ export const post = async (endpoint, body, token) => {
       body: JSON.stringify(body)
     });
     const data = await response.json();
-    console.log('POST Response:', data); 
+    console.log('POST Response:', data);
     return data;
   } catch (error) {
     console.log('API Error:', error);
@@ -44,11 +42,10 @@ export const post = async (endpoint, body, token) => {
   }
 };
 
-// PUT 
 export const put = async (endpoint, body, token) => {
   try {
     const url = endpoint.startsWith('/') ? `${API_URL}${endpoint}` : `${API_URL}/${endpoint}`;
-    console.log('PUT Request to:', url); 
+    console.log('PUT Request to:', url);
     
     const response = await fetch(url, {
       method: 'PUT',
@@ -66,7 +63,6 @@ export const put = async (endpoint, body, token) => {
   }
 };
 
-// DELETE 
 export const del = async (endpoint, token) => {
   try {
     const url = endpoint.startsWith('/') ? `${API_URL}${endpoint}` : `${API_URL}/${endpoint}`;

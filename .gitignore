@@ -5,9 +5,17 @@ frontend/node_modules/
 
 
 backend/.env
+backend/.env.local
 
+# Build files
 dist/
+backend/dist/
 frontend/dist/
 
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
 .DS_Store
 Thumbs.db

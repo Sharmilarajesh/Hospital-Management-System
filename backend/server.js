@@ -12,10 +12,11 @@ seedAdmin();
 
 const app = express();
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// CORS Configuration
+
 const corsOptions = {
   origin: [
     'http://localhost:3000',
@@ -27,23 +28,28 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// API Routes
+
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/doctor', require('./routes/doctorRoutes'));
 app.use('/api/patient', require('./routes/patientRoutes'));
 
+
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
-  
-  app.get('/*', (req, res) => {   // ← changed from '*'
+  const frontendPath = path.join(__dirname, '../frontend/dist');
+
+  app.use(express.static(frontendPath));
+
+  app.use((req, res, next) => {
     if (!req.path.startsWith('/api/')) {
-      res.sendFile(
-        path.join(__dirname, '../frontend/dist/index.html')
+      return res.sendFile(
+        path.join(frontendPath, 'index.html')
       );
     }
+    next();
   });
 }
+
 
 app.get('/', (req, res) => {
   res.json({
@@ -59,8 +65,10 @@ app.get('/', (req, res) => {
   });
 });
 
+
 app.use((err, req, res, next) => {
   console.error('Error:', err.stack);
+
   res.status(500).json({
     message: 'Something went wrong!',
     error:
@@ -70,9 +78,11 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
+
 
 const PORT = process.env.PORT || 5000;
 

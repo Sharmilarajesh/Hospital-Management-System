@@ -70,7 +70,7 @@ const BookAppointment = () => {
       <div className="flex">
         <Sidebar />
         
-        {/* FIXED: Added ml-64 and mt-16 to prevent sidebar overlap */}
+        
         <main className="flex-1 p-6 ml-64 mt-16">
           <button
             onClick={() => navigate(-1)}

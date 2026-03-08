@@ -30,7 +30,6 @@ const Sidebar = () => {
   return (
     <aside className="w-64 bg-white border-r border-gray-200 fixed left-0 top-0 h-screen pt-16">
       {" "}
-      {/* Changed top-16 to top-0 and added pt-16 */}
       <nav className="mt-5 px-2">
         {links.map((link) => {
           const isActive = location.pathname === link.to;

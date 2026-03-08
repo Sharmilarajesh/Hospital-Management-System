@@ -26,7 +26,6 @@ const BookAppointment = () => {
     fetchDoctor();
   }, [doctorId, token]);
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -71,7 +70,8 @@ const BookAppointment = () => {
       <div className="flex">
         <Sidebar />
         
-        <main className="flex-1 p-6">
+        {/* FIXED: Added ml-64 and mt-16 to prevent sidebar overlap */}
+        <main className="flex-1 p-6 ml-64 mt-16">
           <button
             onClick={() => navigate(-1)}
             className="mb-4 text-[#1E3A8A] hover:underline flex items-center gap-1"
